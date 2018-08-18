@@ -350,16 +350,33 @@ var mainH = {
 		this.song = game.sound.play('winmusic');
 		this.defense = 0;
 		this.playerHP = 100;
-		this.enemyHP = 100;
+		this.enemyHP = 500;
+		this.labelScore2 = game.add.text(540, 540, "4", { font: "30px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
-		this.labelScore = game.add.text(200, 40, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelScore = game.add.text(200, 40, "500", { font: "30px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.bool = 1;
 		this.bool2 = 1;
+    this.potCount = 4;
+    this.justHealed = 0;
     },
 
     update: function() {
+      if (this.bool2 == 0) {
+        if (this.potCount >= 1 && this.justHealed == 0) {
+          if(this.playerHP + 70 >= 100){
+    				this.playerHP = 100;
+    			}
+    			else{
+    				this.playerHP += 70;
+    			}
+          this.potCount--;
+          this.labelScore2.text = this.potCount;
+          this.labelScore1.text = this.playerHP;
+          this.justHealed = 1;
+        }
+      }
 	if(this.playerHP <= 0){
 		 this.song.pause();
 		game.state.start('bmain');
@@ -374,16 +391,13 @@ var mainH = {
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){
-			if(this.playerHP + 70 >= 100){
-				this.playerHP = 100;
-				this.labelScore1.text = this.playerHP;
-				this.bool2 = 0;
-			}
-			else{
-				this.playerHP += 70;
-				this.labelScore1.text = this.playerHP;
-				this.bool2 = 0;
-			}
+			this.bool2 = 0;
+		}
+	}
+  if(this.pauseKey.isUp){
+    this.bool2 = 1;
+		if(this.justHealed == 1){
+			this.justHealed = 0;
 		}
 	}
 	if(this.bool == 1){
@@ -409,8 +423,8 @@ var mainH = {
 	}
 
 	if(this.input.left.isDown){
-		if(this.defense < 3){
-		this.defense = this.defense+3;
+		if(this.defense < 6){
+		this.defense = this.defense+1.5;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+4));
 		this.labelScore1.text = this.playerHP;
@@ -447,4 +461,4 @@ game.state.add('gmain', mainG);
 game.state.add('mainJapan', mainJapan);
 game.state.add('hmain', mainH);
 game.state.add('imain', mainI);
-game.state.start('bmain');
+game.state.start('hmain');

@@ -461,4 +461,4 @@ game.state.add('gmain', mainG);
 game.state.add('mainJapan', mainJapan);
 game.state.add('hmain', mainH);
 game.state.add('imain', mainI);
-game.state.start('hmain');
+game.state.start('bmain');

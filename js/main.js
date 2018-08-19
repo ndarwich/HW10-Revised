@@ -200,7 +200,7 @@ var mainCave = {
 
 var mainGMU = {
     preload: function() {
-		game.load.image('background' , 'assets/gmucampus.jpg');
+		game.load.image('background' , 'assets/gmu.jpg');
 		game.load.image('player' , 'assets/player.png');
 		game.load.image('enemy' , 'assets/selfieman.png');
 		game.load.audio('music', 'assets/asianmusic.mp3');

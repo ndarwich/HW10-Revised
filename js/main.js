@@ -413,6 +413,7 @@ var mainF = {
 			this.labelScore.text = this.enemyHP;
 		}
 	}
+
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5)))+this.defense);
@@ -442,7 +443,7 @@ var mainF = {
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 3){
+		if(this.defense < 2){
 		this.defense = this.defense+2;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));

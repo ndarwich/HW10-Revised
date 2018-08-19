@@ -437,7 +437,7 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(2, 10)));
+		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(2, 10));
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
@@ -447,7 +447,7 @@ var mainF = {
 		if(this.defense < 2){
 		this.defense = this.defense+2;
 		}
-		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(5, 8)));
+		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(5, 8));
 		this.labelScore1.text = this.playerHP;
 	}
 	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){

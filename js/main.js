@@ -417,6 +417,7 @@ var mainF = {
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - ((this.game.rnd.integerInRange(0, 11))+this.defense);
+		
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
 		}

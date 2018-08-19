@@ -560,7 +560,7 @@ var mainH = {
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 6){
+		if(this.defense < 5){
 		this.defense = this.defense+1;
 		}
 		this.playerHP = this.playerHP - damage(7,11,this.defense);
@@ -656,7 +656,7 @@ var mainJ = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(10,14,8+((inkAvailable-1)*6));
+		this.enemyHP = this.enemyHP - damage(10,14,8+((this.inkAvailable-1)*6));
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
 		}
@@ -668,7 +668,7 @@ var mainJ = {
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(16,20,8+((inkAvailable-1)*6));
+		this.enemyHP = this.enemyHP - damage(16,20,8+((this.inkAvailable-1)*6));
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;

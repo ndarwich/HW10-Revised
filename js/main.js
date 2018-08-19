@@ -103,7 +103,7 @@ var mainJapan = {
 		game.load.image('background' , 'assets/tokyo.jpg');
 		game.load.image('player' , 'assets/player.png');
 		game.load.image('enemy' , 'assets/samurai.png');
-		game.load.audio('music', 'assets/city.mp3');
+		game.load.audio('music', 'assets/asianmusic.mp3');
     },
 
     create: function() {
@@ -181,6 +181,7 @@ var mainD = {
 		this.labelScore1 = game.add.text(580, 490, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(185, 45, "100", { font: "30px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
+		this.keyPressed = 0;
     },
 
     update: function() {
@@ -192,30 +193,47 @@ var mainD = {
 			this.song.pause();
 			game.state.start('bmain');
 		}
-	if(this.input.up.isDown){
+		
+	if(this.input.up.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - (4+this.defense);
-		this.labelScore.text = this.enemyHP;
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
 		this.playerHP = this.playerHP - 3;
 		this.labelScore1.text = this.playerHP;
 	}
-	if(this.input.down.isDown){
+	if(this.input.down.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - (3+this.defense);
 		var x1 = this.enemyHP;
-		this.labelScore.text = this.enemyHP;
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
 		this.playerHP = this.playerHP - 5;
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
-	if(this.input.right.isDown){
+	if(this.input.right.isDown && this.keyPressed == 0){
 		this.song.pause();
 		game.state.start('bmain');
 	}
-	if(this.input.left.isDown){
+	if(this.input.left.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		if(this.defense < 3){
 		this.defense = this.defense+3;
 		}
 		this.playerHP = this.playerHP - 4;
 		this.labelScore1.text = this.playerHP;
+	}
+	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
+		this.keyPressed = 0;
 	}
     },
 };
@@ -258,6 +276,7 @@ var mainF = {
 		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.bool = 1;
 		this.bool2 = 1;
+		this.keyPressed = 0;
     },
 
     update: function() {
@@ -275,47 +294,63 @@ var mainF = {
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){
-			if(this.playerHP + 70 >= 100){
+			if(this.playerHP + 65 >= 100){
 				this.playerHP = 100;
 				this.labelScore1.text = this.playerHP;
 				this.bool2 = 0;
 			}
 			else{
-				this.playerHP += 70;
+				this.playerHP += 65;
 				this.labelScore1.text = this.playerHP;
 				this.bool2 = 0;
 			}
 		}
 	}
 	if(this.bool == 1){
-		if(this.enemyHP <= 20){
+		if(this.enemyHP <= 15){
 			this.bool = 0;
-			this.enemyHP = this.enemyHP + 45;
+			this.enemyHP = this.enemyHP + 55;
 			this.labelScore.text = this.enemyHP;
 		}
 	}
-	if(this.input.up.isDown){
-		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(2)+4)))+this.defense);
-		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
+	if(this.input.up.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5)))+this.defense);
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(5)+7));
 		this.labelScore1.text = this.playerHP;
 	}
-	if(this.input.down.isDown){
-		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(4)+3))+this.defense);
+	if(this.input.down.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(5)+3))+this.defense);
 		var x1 = this.enemyHP;
-		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(4)+5));
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
 
-	if(this.input.left.isDown){
+	if(this.input.left.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		if(this.defense < 3){
-		this.defense = this.defense+3;
+		this.defense = this.defense+2;
 		}
-		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+4));
+		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
 		this.labelScore1.text = this.playerHP;
 	}
+	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
+		this.keyPressed = 0;
+	}	
     },
 };
 
@@ -342,7 +377,7 @@ var mainG = {
 var mainH = {
     preload: function() {
 	game.load.image('background' , 'assets/battle3.PNG');
-	game.load.audio('winmusic', 'assets/battlemusic.mp3');
+	game.load.audio('winmusic', 'assets/finalbattlemusic.mp3');
     },
 
     create: function() {
@@ -387,7 +422,7 @@ var mainH = {
 	}
 	if(this.input.right.isDown){
 		this.song.pause();
-		game.state.start('main');
+		game.state.start('mainJapan');
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){

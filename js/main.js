@@ -417,7 +417,7 @@ var mainF = {
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - ((this.game.rnd.integerInRange(0, 11))+this.defense);
-		
+
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
 		}
@@ -597,7 +597,7 @@ var mainI = {
 
 var mainJ = {
     preload: function() {
-	game.load.image('background' , 'assets/finalbattle.PNG');
+	game.load.image('background' , 'assets/battle4.PNG');
 	game.load.audio('winmusic', 'assets/battlemusic.mp3');
     },
 
@@ -714,7 +714,7 @@ var mainK = {
 
 var mainL = {
     preload: function() {
-	game.load.image('background' , 'assets/finalbattle.PNG');
+	game.load.image('background' , 'assets/battle5.PNG');
 	game.load.audio('winmusic', 'assets/battlemusic.mp3');
     },
 

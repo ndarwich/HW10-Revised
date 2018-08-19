@@ -543,14 +543,14 @@ var mainH = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(4,8,2); //enemy has 2 defense already
+		this.enemyHP = this.enemyHP - damage(5,9,2); //enemy has 2 defense already
 		this.labelScore.text = this.enemyHP;
 		this.playerHP = this.playerHP - damage(6,10,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(18,22,2);
+		this.enemyHP = this.enemyHP - damage(20,24,2);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
 		this.playerHP = this.playerHP - damage(14,18,this.defense);
@@ -605,7 +605,7 @@ var mainJ = {
 		this.playerHP = 100;
 		this.enemyHP = 1000;
     //ink count
-    this.labelScore3 = game.add.text(502, 700, "1", { font: "24px Arial", fill: "#000000" });
+    this.labelScore3 = game.add.text(502, 548, "1", { font: "24px Arial", fill: "#000000" });
     //pot count
     this.labelScore2 = game.add.text(543, 518, "5", { font: "24px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
@@ -639,7 +639,7 @@ var mainJ = {
 	}
 	if(this.inkKey.isDown){
     if (this.inkAvailable == 1) {
-      this.labelScore3.text = 0;
+      this.labelScore3.text = "0";
       this.enemyHP = this.enemyHP + Math.floor(this.enemyHP/2); //heals the enemy
       //lower the enemy's defense by 6 though, as he is blind
 			this.labelScore.text = this.enemyHP;
@@ -847,4 +847,4 @@ game.state.add('kmain', mainK);
 game.state.add('mainGMU', mainGMU);
 game.state.add('lmain', mainL);
 game.state.add('mmain', mainM);
-game.state.start('bmain');
+game.state.start('jmain');

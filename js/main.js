@@ -541,13 +541,6 @@ var mainH = {
 			this.justHealed = 0;
 		}
 	}
-	if(this.bool == 1){
-		if(this.enemyHP <= 20){
-			this.bool = 0;
-			this.enemyHP = this.enemyHP + 70;
-			this.labelScore.text = this.enemyHP;
-		}
-	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - damage(4,8,2); //enemy has 2 defense already
@@ -567,10 +560,10 @@ var mainH = {
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 1){
-		this.defense = this.defense+6;
+		if(this.defense < 6){
+		this.defense = this.defense+1;
 		}
-		this.playerHP = this.playerHP - DAMAGEPLAYER;
+		this.playerHP = this.playerHP - damage(7,11,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
@@ -675,7 +668,7 @@ var mainJ = {
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(16,20,8+((inkAvailable-1)*6);
+		this.enemyHP = this.enemyHP - damage(16,20,8+((inkAvailable-1)*6));
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;

@@ -113,7 +113,7 @@ var mainJapan = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(550, 450, 'player');
+		this.player = game.add.sprite(700, 450, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
 		this.enemy = game.add.sprite(50, 400, 'enemy');
@@ -163,7 +163,7 @@ var mainCave = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(550, 400, 'player');
+		this.player = game.add.sprite(700, 400, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
 		this.enemy = game.add.sprite(50, 400, 'enemy');
@@ -213,7 +213,7 @@ var mainGMU = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(550, 400, 'player');
+		this.player = game.add.sprite(700, 400, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
 		this.enemy = game.add.sprite(50, 400, 'enemy');
@@ -398,29 +398,29 @@ var mainF = {
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){
-			if(this.playerHP + 65 >= 100){
+			if(this.playerHP + 70 >= 100){
 				this.playerHP = 100;
 				this.labelScore1.text = this.playerHP;
 				this.bool2 = 0;
 			}
 			else{
-				this.playerHP += 65;
+				this.playerHP += 70;
 				this.labelScore1.text = this.playerHP;
 				this.bool2 = 0;
 			}
 		}
 	}
 	if(this.bool == 1){
-		if(this.enemyHP <= 10){
+		if(this.enemyHP <= 20){
 			this.bool = 0;
-			this.enemyHP = this.enemyHP + 50;
+			this.enemyHP = this.enemyHP + 70;
 			this.labelScore.text = this.enemyHP;
 		}
 	}
 
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((this.game.rnd.integerInRange(0, 11))+this.defense);
+		this.enemyHP = this.enemyHP - damage(4, 8, 0);
 
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -428,12 +428,12 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(0, 13));
+		this.playerHP = this.playerHP - damage(6,10,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((this.game.rnd.integerInRange(4, 9))+this.defense);
+		this.enemyHP = this.enemyHP - damage(8, 12, 0);
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -441,17 +441,17 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(2, 10));
+		this.playerHP = this.playerHP - damage(11, 15, this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 2){
+		if(this.defense < 3){
 		this.defense = this.defense+2;
 		}
-		this.playerHP = this.playerHP - (this.game.rnd.integerInRange(5, 8));
+		this.playerHP = this.playerHP - damage(4, 8, this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
@@ -550,25 +550,25 @@ var mainH = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(2)+4-this.defense))));
+		this.enemyHP = this.enemyHP - damage(4,8,2); //enemy has 2 defense already
 		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
+		this.playerHP = this.playerHP - damage(6,10,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(4)+3))-this.defense);
+		this.enemyHP = this.enemyHP - damage(18,22,2);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
+		this.playerHP = this.playerHP - damage(14,18,this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 6){
-		this.defense = this.defense+1.5;
+		if(this.defense < 1){
+		this.defense = this.defense+6;
 		}
 		this.playerHP = this.playerHP - DAMAGEPLAYER;
 		this.labelScore1.text = this.playerHP;
@@ -612,7 +612,7 @@ var mainJ = {
 		this.playerHP = 100;
 		this.enemyHP = 1000;
     //ink count
-    this.labelScore3 = game.add.text(502, 550, "1", { font: "24px Arial", fill: "#000000" });
+    this.labelScore3 = game.add.text(502, 700, "1", { font: "24px Arial", fill: "#000000" });
     //pot count
     this.labelScore2 = game.add.text(543, 518, "5", { font: "24px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
@@ -647,7 +647,8 @@ var mainJ = {
 	if(this.inkKey.isDown){
     if (this.inkAvailable == 1) {
       this.labelScore3.text = 0;
-      this.enemyHP = this.enemyHP + Math.floor(this.enemyHP/2);
+      this.enemyHP = this.enemyHP + Math.floor(this.enemyHP/2); //heals the enemy
+      //lower the enemy's defense by 6 though, as he is blind
 			this.labelScore.text = this.enemyHP;
       this.inkAvailable = 0;
     }
@@ -662,19 +663,19 @@ var mainJ = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5-this.defense))));
+		this.enemyHP = this.enemyHP - damage(10,14,8+((inkAvailable-1)*6));
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
 		}
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (Math.floor(Math.random(5)+7));
+		this.playerHP = this.playerHP - damage(6,10,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(5)+3-this.defense)));
+		this.enemyHP = this.enemyHP - damage(16,20,8+((inkAvailable-1)*6);
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -682,15 +683,15 @@ var mainJ = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (Math.floor(Math.random(4)+5));
+		this.playerHP = this.playerHP - damage(14,18,this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 6){
-		    this.defense = this.defense+1.5;
+		if(this.defense < 5){
+		    this.defense = this.defense+1;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
 		this.labelScore1.text = this.playerHP;
@@ -758,13 +759,13 @@ var mainL = {
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){
-			if(this.playerHP + 65 >= 100){
+			if(this.playerHP + 70 >= 100){
 				this.playerHP = 100;
 				this.labelScore1.text = this.playerHP;
 				this.bool2 = 0;
 			}
 			else{
-				this.playerHP += 65;
+				this.playerHP += 70;
 				this.labelScore1.text = this.playerHP;
 				this.bool2 = 0;
 			}
@@ -773,7 +774,7 @@ var mainL = {
 	if(this.bool == 1){
 		if(this.enemyHP <= 15){
 			this.bool = 0;
-			this.enemyHP = this.enemyHP + 55;
+			this.enemyHP = this.enemyHP + 70;
 			this.labelScore.text = this.enemyHP;
 		}
 	}

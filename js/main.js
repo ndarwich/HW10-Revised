@@ -109,7 +109,7 @@ var mainJapan = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(550, 400, 'player');
+		this.player = game.add.sprite(550, 450, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
 		this.enemy = game.add.sprite(50, 400, 'enemy');
@@ -144,6 +144,106 @@ var mainJapan = {
 	over: function(){
 		this.song.pause();
 		game.state.start('hmain');
+	},
+};
+
+
+var mainCave = {
+    preload: function() {
+		game.load.image('background' , 'assets/cave.jpg');
+		game.load.image('player' , 'assets/player.png');
+		game.load.image('enemy' , 'assets/camelman.png');
+		game.load.audio('music', 'assets/asianmusic.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+		this.player = game.add.sprite(550, 400, 'player');
+		game.physics.arcade.enable(this.player);
+		this.player.body.collideWorldBounds=true;
+		this.enemy = game.add.sprite(50, 400, 'enemy');
+		game.physics.arcade.enable(this.enemy);
+
+		this.input = game.input.keyboard.createCursorKeys();
+		this.song = game.sound.play('music');
+
+    },
+
+    update: function() {
+		game.physics.arcade.overlap(this.player, this.enemy, this.over, null, this);
+
+		this.player.body.velocity.y = 0;
+		this.player.body.velocity.x = 0;
+
+	if(this.input.up.isDown){
+		this.player.body.velocity.y = -150;
+	}
+	if(this.input.down.isDown){
+		this.player.body.velocity.y = 150;
+	}
+	if(this.input.right.isDown){
+		this.player.body.velocity.x = 150;
+	}
+	if(this.input.left.isDown){
+		this.player.body.velocity.x = -150;
+	}
+
+    },
+
+	over: function(){
+		this.song.pause();
+		game.state.start('jmain');
+	},
+};
+
+
+var mainGMU = {
+    preload: function() {
+		game.load.image('background' , 'assets/gmucampus.jpg');
+		game.load.image('player' , 'assets/player.png');
+		game.load.image('enemy' , 'assets/selfieman.png');
+		game.load.audio('music', 'assets/asianmusic.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+		this.player = game.add.sprite(550, 400, 'player');
+		game.physics.arcade.enable(this.player);
+		this.player.body.collideWorldBounds=true;
+		this.enemy = game.add.sprite(50, 400, 'enemy');
+		game.physics.arcade.enable(this.enemy);
+
+		this.input = game.input.keyboard.createCursorKeys();
+		this.song = game.sound.play('music');
+
+    },
+
+    update: function() {
+		game.physics.arcade.overlap(this.player, this.enemy, this.over, null, this);
+
+		this.player.body.velocity.y = 0;
+		this.player.body.velocity.x = 0;
+
+	if(this.input.up.isDown){
+		this.player.body.velocity.y = -150;
+	}
+	if(this.input.down.isDown){
+		this.player.body.velocity.y = 150;
+	}
+	if(this.input.right.isDown){
+		this.player.body.velocity.x = 150;
+	}
+	if(this.input.left.isDown){
+		this.player.body.velocity.x = -150;
+	}
+
+    },
+
+	over: function(){
+		this.song.pause();
+		game.state.start('lmain');
 	},
 };
 
@@ -193,7 +293,7 @@ var mainD = {
 			this.song.pause();
 			game.state.start('bmain');
 		}
-		
+
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - (4+this.defense);
@@ -350,7 +450,7 @@ var mainF = {
 	}
 	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
 		this.keyPressed = 0;
-	}	
+	}
     },
 };
 
@@ -386,14 +486,14 @@ var mainH = {
 		this.defense = 0;
 		this.playerHP = 100;
 		this.enemyHP = 500;
-		this.labelScore2 = game.add.text(540, 540, "4", { font: "30px Arial", fill: "#000000" });
+		this.labelScore2 = game.add.text(540, 540, "3", { font: "30px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(200, 40, "500", { font: "30px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.bool = 1;
 		this.bool2 = 1;
-    this.potCount = 4;
+    this.potCount = 3;
     this.justHealed = 0;
     },
 
@@ -438,17 +538,19 @@ var mainH = {
 	if(this.bool == 1){
 		if(this.enemyHP <= 20){
 			this.bool = 0;
-			this.enemyHP = this.enemyHP + 45;
+			this.enemyHP = this.enemyHP + 70;
 			this.labelScore.text = this.enemyHP;
 		}
 	}
-	if(this.input.up.isDown){
+	if(this.input.up.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(2)+4)))+this.defense);
 		this.labelScore.text = this.enemyHP;
 		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
 		this.labelScore1.text = this.playerHP;
 	}
-	if(this.input.down.isDown){
+	if(this.input.down.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(4)+3))+this.defense);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
@@ -457,12 +559,16 @@ var mainH = {
 		this.labelScore1.text = this.playerHP;
 	}
 
-	if(this.input.left.isDown){
+	if(this.input.left.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
 		if(this.defense < 6){
 		this.defense = this.defense+1.5;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+4));
 		this.labelScore1.text = this.playerHP;
+	}
+	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
+		this.keyPressed = 0;
 	}
     },
 };
@@ -470,6 +576,239 @@ var mainH = {
 var mainI = {
     preload: function() {
 	game.load.image('background' , 'assets/battle31.PNG');
+	game.load.audio('winmusic', 'assets/finalwin.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		this.song = game.sound.play('winmusic');
+    this.input = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    },
+
+    update: function() {
+  		if(this.input.isDown){
+  			this.song.pause();
+  			game.state.start('mainCave');
+  		}
+    },
+};
+
+var mainJ = {
+    preload: function() {
+	game.load.image('background' , 'assets/finalbattle.PNG');
+	game.load.audio('winmusic', 'assets/battlemusic.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		this.song = game.sound.play('winmusic');
+		this.defense = 0;
+		this.playerHP = 100;
+		this.enemyHP = 100;
+		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelScore = game.add.text(200, 40, "100", { font: "30px Arial", fill: "#000000" });
+		this.input = game.input.keyboard.createCursorKeys();
+		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+		this.bool = 1;
+		this.bool2 = 1;
+		this.keyPressed = 0;
+    },
+
+    update: function() {
+	if(this.playerHP <= 0){
+		 this.song.pause();
+		game.state.start('mainCave');
+	}
+	if(this.enemyHP <= 0){
+		 this.song.pause();
+		game.state.start('kmain');
+	}
+	if(this.input.right.isDown){
+		this.song.pause();
+		game.state.start('main');
+	}
+	if(this.pauseKey.isDown){
+		if(this.bool2 == 1){
+			if(this.playerHP + 65 >= 100){
+				this.playerHP = 100;
+				this.labelScore1.text = this.playerHP;
+				this.bool2 = 0;
+			}
+			else{
+				this.playerHP += 65;
+				this.labelScore1.text = this.playerHP;
+				this.bool2 = 0;
+			}
+		}
+	}
+	if(this.bool == 1){
+		if(this.enemyHP <= 15){
+			this.bool = 0;
+			this.enemyHP = this.enemyHP + 55;
+			this.labelScore.text = this.enemyHP;
+		}
+	}
+	if(this.input.up.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5)))+this.defense);
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(5)+7));
+		this.labelScore1.text = this.playerHP;
+	}
+	if(this.input.down.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(5)+3))+this.defense);
+		var x1 = this.enemyHP;
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(4)+5));
+		var x2 = this.playerHP;
+		this.labelScore1.text = this.playerHP;
+	}
+
+	if(this.input.left.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		if(this.defense < 3){
+		this.defense = this.defense+2;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
+		this.labelScore1.text = this.playerHP;
+	}
+	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
+		this.keyPressed = 0;
+	}
+    },
+};
+
+
+var mainK = {
+    preload: function() {
+	game.load.image('background' , 'assets/battle41.PNG');
+	game.load.audio('winmusic', 'assets/finalwin.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		this.song = game.sound.play('winmusic');
+    this.input = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    },
+
+    update: function() {
+  		if(this.input.isDown){
+  			this.song.pause();
+  			game.state.start('mainGMU');
+  		}
+    },
+};
+
+var mainL = {
+    preload: function() {
+	game.load.image('background' , 'assets/finalbattle.PNG');
+	game.load.audio('winmusic', 'assets/battlemusic.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		this.song = game.sound.play('winmusic');
+		this.defense = 0;
+		this.playerHP = 100;
+		this.enemyHP = 100;
+		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelScore = game.add.text(200, 40, "100", { font: "30px Arial", fill: "#000000" });
+		this.input = game.input.keyboard.createCursorKeys();
+		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+		this.bool = 1;
+		this.bool2 = 1;
+		this.keyPressed = 0;
+    },
+
+    update: function() {
+	if(this.playerHP <= 0){
+		 this.song.pause();
+		game.state.start('mainGMU');
+	}
+	if(this.enemyHP <= 0){
+		 this.song.pause();
+		game.state.start('mmain');
+	}
+	if(this.input.right.isDown){
+		this.song.pause();
+		game.state.start('main');
+	}
+	if(this.pauseKey.isDown){
+		if(this.bool2 == 1){
+			if(this.playerHP + 65 >= 100){
+				this.playerHP = 100;
+				this.labelScore1.text = this.playerHP;
+				this.bool2 = 0;
+			}
+			else{
+				this.playerHP += 65;
+				this.labelScore1.text = this.playerHP;
+				this.bool2 = 0;
+			}
+		}
+	}
+	if(this.bool == 1){
+		if(this.enemyHP <= 15){
+			this.bool = 0;
+			this.enemyHP = this.enemyHP + 55;
+			this.labelScore.text = this.enemyHP;
+		}
+	}
+	if(this.input.up.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5)))+this.defense);
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(5)+7));
+		this.labelScore1.text = this.playerHP;
+	}
+	if(this.input.down.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(5)+3))+this.defense);
+		var x1 = this.enemyHP;
+		if(this.enemyHP < 0){
+			this.labelScore.text = 0;
+		}
+		else {
+			this.labelScore.text = this.enemyHP;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(4)+5));
+		var x2 = this.playerHP;
+		this.labelScore1.text = this.playerHP;
+	}
+
+	if(this.input.left.isDown && this.keyPressed == 0){
+		this.keyPressed = 1;
+		if(this.defense < 3){
+		this.defense = this.defense+2;
+		}
+		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
+		this.labelScore1.text = this.playerHP;
+	}
+	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
+		this.keyPressed = 0;
+	}
+    },
+};
+
+var mainM = {
+    preload: function() {
+	game.load.image('background' , 'assets/battle51.PNG');
 	game.load.audio('winmusic', 'assets/finalwin.mp3');
     },
 
@@ -496,4 +835,10 @@ game.state.add('gmain', mainG);
 game.state.add('mainJapan', mainJapan);
 game.state.add('hmain', mainH);
 game.state.add('imain', mainI);
+game.state.add('mainCave', mainCave);
+game.state.add('jmain', mainJ);
+game.state.add('kmain', mainK);
+game.state.add('mainGMU', mainGMU);
+game.state.add('lmain', mainL);
+game.state.add('mmain', mainM);
 game.state.start('bmain');

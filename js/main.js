@@ -429,7 +429,7 @@ var mainF = {
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - (this.game.rnd.integerInRange(4, 9))+this.defense);
+		this.enemyHP = this.enemyHP - ((this.game.rnd.integerInRange(4, 9))+this.defense);
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;

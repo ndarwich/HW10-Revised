@@ -1,3 +1,7 @@
+function damage(minDmg, maxDmg, defense) {
+  return Math.floor(minDmg + Math.random()*(maxDmg-minDmg) - defense);
+}
+
 var mainState = {
     preload: function() {
 		game.load.image('background' , 'assets/mountain.jpg');
@@ -296,19 +300,19 @@ var mainD = {
 
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - (4+this.defense);
+		this.enemyHP = this.enemyHP - damage(5, 9, 0);
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
 		}
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - 3;
+		this.playerHP = this.playerHP - damage(6, 10, this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - (3+this.defense);
+		this.enemyHP = this.enemyHP - damage(10, 14, 0);
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -316,7 +320,7 @@ var mainD = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - 5;
+		this.playerHP = this.playerHP - damage(14, 18, this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
@@ -327,9 +331,9 @@ var mainD = {
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		if(this.defense < 3){
-		this.defense = this.defense+3;
+		    this.defense = this.defense+1;
 		}
-		this.playerHP = this.playerHP - 4;
+		this.playerHP = this.playerHP - damage(4, 8, this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
@@ -546,14 +550,14 @@ var mainH = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(2)+4)))+this.defense);
+		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(2)+4-this.defense))));
 		this.labelScore.text = this.enemyHP;
 		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(4)+3))+this.defense);
+		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(4)+3))-this.defense);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
 		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+5));
@@ -566,7 +570,7 @@ var mainH = {
 		if(this.defense < 6){
 		this.defense = this.defense+1.5;
 		}
-		this.playerHP = this.playerHP - (Math.floor(Math.random(2)+4));
+		this.playerHP = this.playerHP - DAMAGEPLAYER;
 		this.labelScore1.text = this.playerHP;
 	}
 	if((this.input.left.isUp && this.input.right.isUp && this.input.down.isUp && this.input.up.isUp)){
@@ -606,14 +610,20 @@ var mainJ = {
 		this.song = game.sound.play('winmusic');
 		this.defense = 0;
 		this.playerHP = 100;
-		this.enemyHP = 100;
+		this.enemyHP = 1000;
+    //ink count
+    this.labelScore3 = game.add.text(502, 550, "1", { font: "24px Arial", fill: "#000000" });
+    //pot count
+    this.labelScore2 = game.add.text(543, 518, "5", { font: "24px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
-		this.labelScore = game.add.text(200, 40, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelScore = game.add.text(200, 40, "1000", { font: "30px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
-		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
-		this.bool = 1;
-		this.bool2 = 1;
+		this.potKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+		this.inkKey = game.input.keyboard.addKey(Phaser.Keyboard.B);
+    this.inkAvailable = 1;
+    this.potCount = 5;
 		this.keyPressed = 0;
+    this.mutex = 1;
     },
 
     update: function() {
@@ -629,30 +639,30 @@ var mainJ = {
 		this.song.pause();
 		game.state.start('main');
 	}
-	if(this.pauseKey.isDown){
-		if(this.bool2 == 1){
-			if(this.playerHP + 65 >= 100){
-				this.playerHP = 100;
-				this.labelScore1.text = this.playerHP;
-				this.bool2 = 0;
-			}
-			else{
-				this.playerHP += 65;
-				this.labelScore1.text = this.playerHP;
-				this.bool2 = 0;
-			}
-		}
+	if(this.potKey.isDown){
+    if (this.mutex == 1 && this.potCount >= 1) {
+      this.mutex = 0;
+    }
 	}
-	if(this.bool == 1){
-		if(this.enemyHP <= 15){
-			this.bool = 0;
-			this.enemyHP = this.enemyHP + 55;
+	if(this.inkKey.isDown){
+    if (this.inkAvailable == 1) {
+      this.labelScore3.text = 0;
+      this.enemyHP = this.enemyHP + Math.floor(this.enemyHP/2);
 			this.labelScore.text = this.enemyHP;
-		}
+      this.inkAvailable = 0;
+    }
+	}
+	if(this.potKey.isUp){
+    if (this.mutex == 0) {
+      this.playerHP = (this.playerHP + 70 > 100) ? 100 : this.playerHP + 70;
+			this.labelScore1.text = this.playerHP;
+      this.labelScore2.text = --this.potCount;
+      this.mutex = 1;
+    }
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5)))+this.defense);
+		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5-this.defense))));
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
 		}
@@ -664,7 +674,7 @@ var mainJ = {
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(5)+3))+this.defense);
+		this.enemyHP = this.enemyHP - ((Math.floor(Math.random(5)+3-this.defense)));
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -679,8 +689,8 @@ var mainJ = {
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 3){
-		this.defense = this.defense+2;
+		if(this.defense < 6){
+		    this.defense = this.defense+1.5;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
 		this.labelScore1.text = this.playerHP;

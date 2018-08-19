@@ -413,6 +413,7 @@ var mainF = {
 			this.labelScore.text = this.enemyHP;
 		}
 	}
+
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		this.enemyHP = this.enemyHP - ((Math.floor((Math.random(3)+5)))+this.defense);
@@ -422,7 +423,7 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (Math.floor(Math.random(5)+7));
+		this.playerHP = this.playerHP - (game.rnd.integerInRange(0, 6)+7));
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
@@ -435,7 +436,7 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - (Math.floor(Math.random(4)+5));
+		this.playerHP = this.playerHP - (game.rnd.integerInRange(0, 6)+5));
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}

@@ -169,7 +169,7 @@ var mainCave = {
 		game.load.image('background' , 'assets/cave.jpg');
 		game.load.image('player' , 'assets/player.png');
 		game.load.image('enemy' , 'assets/camelman.png');
-		game.load.audio('music', 'assets/asianmusic.mp3');
+		game.load.audio('music', 'assets/cavemusic.mp3');
     },
 
     create: function() {
@@ -632,7 +632,7 @@ var mainI = {
 var mainJ = {
     preload: function() {
 	game.load.image('background' , 'assets/battle4.PNG');
-	game.load.audio('winmusic', 'assets/battlemusic.mp3');
+	game.load.audio('winmusic', 'assets/sandmusic.mp3');
     },
 
     create: function() {

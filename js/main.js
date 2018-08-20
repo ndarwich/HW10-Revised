@@ -879,7 +879,7 @@ var mainM = {
 //game over state, press space to go to first level
 var gameover = {
     preload: function() {
-	game.load.image('background' , 'assets/gameover.png');
+	game.load.image('background' , 'assets/game-over.png');
 	game.load.audio('winmusic', 'assets/finalwin.mp3');
     },
 

@@ -1,4 +1,4 @@
-<h1 align="center">Pokébil</h1>
+<div><h1 style="text-align:center">Pokébil</h1></div>
 
 ## Objective
 

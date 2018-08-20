@@ -304,6 +304,10 @@ var mainD = {
 		this.enemyHP = 100;
 		this.labelScore1 = game.add.text(580, 490, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(185, 45, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelAccuracyPlayer = game.add.text(120, 333, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefensePlayer = game.add.text(110, 360, "0", { font: "20px Arial", fill: "#000000" });
+		this.labelAccuracyEnemy = game.add.text(760, 7, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefenseEnemy = game.add.text(750, 34, "0", { font: "20px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.keyPressed = 0;
     },
@@ -350,8 +354,9 @@ var mainD = {
 	}
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 3){
+		if(this.defense < 2){
 		    this.defense = this.defense+1;
+        this.labelDefensePlayer.text = this.defense;
 		}
 		this.playerHP = this.playerHP - damage(4, 8, this.defense);
 		this.labelScore1.text = this.playerHP;
@@ -394,8 +399,13 @@ var mainF = {
 		this.defense = 0;
 		this.playerHP = 100;
 		this.enemyHP = 100;
+		this.labelScore2 = game.add.text(540, 540, "1", { font: "30px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(200, 40, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelAccuracyPlayer = game.add.text(120, 333, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefensePlayer = game.add.text(110, 360, "0", { font: "20px Arial", fill: "#000000" });
+		this.labelAccuracyEnemy = game.add.text(760, 7, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefenseEnemy = game.add.text(750, 34, "0", { font: "20px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.bool = 1;
@@ -418,6 +428,7 @@ var mainF = {
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){
+      this.labelScore2.text = 0;
 			if(this.playerHP + 70 >= 100){
 				this.playerHP = 100;
 				this.labelScore1.text = this.playerHP;
@@ -469,7 +480,8 @@ var mainF = {
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		if(this.defense < 3){
-		this.defense = this.defense+2;
+		this.defense = this.defense+1;
+    this.labelDefensePlayer.text = this.defense;
 		}
 		this.playerHP = this.playerHP - damage(4, 8, this.defense);
 		this.labelScore1.text = this.playerHP;
@@ -515,6 +527,10 @@ var mainH = {
 		this.labelScore2 = game.add.text(540, 540, "3", { font: "30px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(200, 40, "500", { font: "30px Arial", fill: "#000000" });
+		this.labelAccuracyPlayer = game.add.text(120, 333, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefensePlayer = game.add.text(110, 360, "0", { font: "20px Arial", fill: "#000000" });
+		this.labelAccuracyEnemy = game.add.text(760, 7, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefenseEnemy = game.add.text(750, 34, "2", { font: "20px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.bool = 1;
@@ -581,7 +597,8 @@ var mainH = {
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
 		if(this.defense < 5){
-		this.defense = this.defense+1;
+  		this.defense = this.defense+1;
+      this.labelDefensePlayer.text = this.defense;
 		}
 		this.playerHP = this.playerHP - damage(7,11,this.defense);
 		this.labelScore1.text = this.playerHP;
@@ -630,6 +647,10 @@ var mainJ = {
     this.labelScore2 = game.add.text(543, 518, "5", { font: "24px Arial", fill: "#000000" });
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(200, 40, "1000", { font: "30px Arial", fill: "#000000" });
+		this.labelAccuracyPlayer = game.add.text(120, 333, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefensePlayer = game.add.text(110, 360, "0", { font: "20px Arial", fill: "#000000" });
+		this.labelAccuracyEnemy = game.add.text(760, 7, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefenseEnemy = game.add.text(750, 34, "8", { font: "20px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.potKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.inkKey = game.input.keyboard.addKey(Phaser.Keyboard.B);
@@ -663,6 +684,7 @@ var mainJ = {
       this.enemyHP = this.enemyHP + Math.floor(this.enemyHP/2); //heals the enemy
       //lower the enemy's defense by 6 though, as he is blind
 			this.labelScore.text = this.enemyHP;
+      this.labelDefenseEnemy.text = "2"; //enemy loses 6 defense
       this.inkAvailable = 0;
     }
 	}
@@ -705,6 +727,7 @@ var mainJ = {
 		this.keyPressed = 1;
 		if(this.defense < 5){
 		    this.defense = this.defense+1;
+        this.labelDefensePlayer.text = this.defense;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
 		this.labelScore1.text = this.playerHP;
@@ -750,6 +773,10 @@ var mainL = {
 		this.enemyHP = 100;
 		this.labelScore1 = game.add.text(625, 505, "100", { font: "30px Arial", fill: "#000000" });
 		this.labelScore = game.add.text(200, 40, "100", { font: "30px Arial", fill: "#000000" });
+		this.labelAccuracyPlayer = game.add.text(120, 333, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefensePlayer = game.add.text(110, 360, "0", { font: "20px Arial", fill: "#000000" });
+		this.labelAccuracyEnemy = game.add.text(760, 7, "1", { font: "20px Arial", fill: "#000000" });
+		this.labelDefenseEnemy = game.add.text(750, 34, "0", { font: "20px Arial", fill: "#000000" });
 		this.input = game.input.keyboard.createCursorKeys();
 		this.pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.bool = 1;
@@ -764,7 +791,7 @@ var mainL = {
 	}
 	if(this.enemyHP <= 0){
 		 this.song.stop();
-		game.state.start('mmain');
+		game.state.start('comingsoon');
 	}
 	if(this.input.right.isDown){
 		this.song.stop();
@@ -820,8 +847,9 @@ var mainL = {
 
 	if(this.input.left.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		if(this.defense < 3){
-		this.defense = this.defense+2;
+		if(this.defense < 8){
+		this.defense = this.defense+1;
+    this.labelDefensePlayer.text = this.defense;
 		}
 		this.playerHP = this.playerHP - (Math.floor(Math.random(6)+4));
 		this.labelScore1.text = this.playerHP;
@@ -869,6 +897,27 @@ var gameover = {
     },
 };
 
+//game over state, press space to go to first level
+var comingsoonstate = {
+    preload: function() {
+	game.load.image('background' , 'assets/comingsoon.png');
+	game.load.audio('winmusic', 'assets/finalwin.mp3');
+    },
+
+    create: function() {
+  		this.background = game.add.tileSprite(0,0,800,600,'background');
+  		this.song = game.sound.play('winmusic');
+      this.input = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    },
+
+    update: function() {
+  		if(this.input.isDown){
+  			this.song.stop();
+  			game.state.start('bmain');
+  		}
+    },
+};
+
 
 var game = new Phaser.Game(800, 600);
 
@@ -889,4 +938,5 @@ game.state.add('mainGMU', mainGMU);
 game.state.add('lmain', mainL);
 game.state.add('mmain', mainM);
 game.state.add('gameover', gameover);
+game.state.add('comingsoon', comingsoonstate);
 game.state.start('bmain');

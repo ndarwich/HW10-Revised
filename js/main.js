@@ -15,11 +15,11 @@ var mainState = {
 	// game.stage.backgroundColor = '#94fcc0';
     this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(600, 300, 'player');
+		this.player = game.add.sprite(430, 530, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
 
-		this.enemy = game.add.sprite(50, 150, 'enemy');
+		this.enemy = game.add.sprite(35, 10, 'enemy');
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
@@ -68,10 +68,10 @@ var mainB = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(50, 50, 'player');
+		this.player = game.add.sprite(10, 75, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
-		this.enemy = game.add.sprite(600, 500, 'enemy');
+		this.enemy = game.add.sprite(645, 270, 'enemy');
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
@@ -121,7 +121,7 @@ var mainJapan = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(700, 450, 'player');
+		this.player = game.add.sprite(720, 475, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
 		this.enemy = game.add.sprite(50, 400, 'enemy');
@@ -175,10 +175,10 @@ var mainCave = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(700, 400, 'player');
+		this.player = game.add.sprite(508, 347, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
-		this.enemy = game.add.sprite(50, 400, 'enemy');
+		this.enemy = game.add.sprite(110, 410, 'enemy');
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
@@ -229,10 +229,10 @@ var mainGMU = {
     create: function() {
 		this.background = game.add.tileSprite(0,0,800,600,'background');
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.player = game.add.sprite(700, 400, 'player');
+		this.player = game.add.sprite(115, 410, 'player');
 		game.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds=true;
-		this.enemy = game.add.sprite(50, 400, 'enemy');
+		this.enemy = game.add.sprite(680, 450, 'enemy');
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
@@ -267,7 +267,7 @@ var mainGMU = {
 	over: function(){
 		this.song.stop();
     this.song = null;
-		game.state.start('lmain');
+		game.state.start('comingsoon');
 	},
 };
 
@@ -761,7 +761,7 @@ var mainK = {
 
 var mainL = {
     preload: function() {
-	game.load.image('background' , 'assets/battle5.PNG');
+	game.load.image('background' , 'assets/finalbattle.PNG');
 	game.load.audio('winmusic', 'assets/battlemusic.mp3');
     },
 
@@ -791,7 +791,7 @@ var mainL = {
 	}
 	if(this.enemyHP <= 0){
 		 this.song.stop();
-		game.state.start('comingsoon');
+		game.state.start('kmain');
 	}
 	if(this.input.right.isDown){
 		this.song.stop();

@@ -1,4 +1,4 @@
-<div style="text-align:center;font-weight:bold;">Pokébil</div>
+<div><h1 style="text-align:center">Pokébil</h1></div>
 
 ## Objective
 
@@ -17,8 +17,8 @@ Spacebar - Navigate to next screen
 
 ## Play
 
-This game can be played at https://ndarwich.github.io/HW10-Revised/. It is also
-available in my personal website, http://nabild.com
+This game can be played [here](https://ndarwich.github.io/HW10-Revised/). It is also
+available in my personal website, http://nabild.com.
 
 ### Special Thanks
 

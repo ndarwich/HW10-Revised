@@ -23,6 +23,9 @@ var mainState = {
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
+    if (this.song) {
+      this.song.stop();
+    }
 		this.song = game.sound.play('music');
     },
 
@@ -47,7 +50,8 @@ game.physics.arcade.overlap(this.player, this.enemy, this.over, null, this);
     },
 
 	over: function(){
-		this.song.pause();
+		this.song.stop();
+    this.song = null;
 		game.state.start('fmain');
 	},
 
@@ -71,6 +75,9 @@ var mainB = {
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
+    if (this.song) {
+      this.song.stop();
+    }
 		this.song = game.sound.play('music');
 
     },
@@ -97,7 +104,8 @@ var mainB = {
     },
 
 	over: function(){
-		this.song.pause();
+		this.song.stop();
+    this.song = null;
 		game.state.start('cmain');
 	},
 };
@@ -120,6 +128,9 @@ var mainJapan = {
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
+    if (this.song) {
+      this.song.stop();
+    }
 		this.song = game.sound.play('music');
 
     },
@@ -146,7 +157,8 @@ var mainJapan = {
     },
 
 	over: function(){
-		this.song.pause();
+		this.song.stop();
+    this.song = null;
 		game.state.start('hmain');
 	},
 };
@@ -170,6 +182,9 @@ var mainCave = {
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
+    if (this.song) {
+      this.song.stop();
+    }
 		this.song = game.sound.play('music');
 
     },
@@ -196,7 +211,8 @@ var mainCave = {
     },
 
 	over: function(){
-		this.song.pause();
+		this.song.stop();
+    this.song = null;
 		game.state.start('jmain');
 	},
 };
@@ -220,6 +236,9 @@ var mainGMU = {
 		game.physics.arcade.enable(this.enemy);
 
 		this.input = game.input.keyboard.createCursorKeys();
+    if (this.song) {
+      this.song.stop();
+    }
 		this.song = game.sound.play('music');
 
     },
@@ -246,7 +265,8 @@ var mainGMU = {
     },
 
 	over: function(){
-		this.song.pause();
+		this.song.stop();
+    this.song = null;
 		game.state.start('lmain');
 	},
 };
@@ -290,12 +310,12 @@ var mainD = {
 
     update: function() {
 		if(this.enemyHP <= 0){
-			this.song.pause();
+			this.song.stop();
 			game.state.start('emain');
 		}
 		if(this.playerHP <= 0){
-			this.song.pause();
-			game.state.start('bmain');
+			this.song.stop();
+			game.state.start('gameover');
 		}
 
 	if(this.input.up.isDown && this.keyPressed == 0){
@@ -325,7 +345,7 @@ var mainD = {
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.right.isDown && this.keyPressed == 0){
-		this.song.pause();
+		this.song.stop();
 		game.state.start('bmain');
 	}
 	if(this.input.left.isDown && this.keyPressed == 0){
@@ -356,7 +376,7 @@ this.input = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     update: function() {
 		if(this.input.isDown){
-			this.song.pause();
+			this.song.stop();
 			game.state.start('main');
 		}
     },
@@ -385,15 +405,15 @@ var mainF = {
 
     update: function() {
 	if(this.playerHP <= 0){
-		 this.song.pause();
-		game.state.start('bmain');
+		 this.song.stop();
+		game.state.start('gameover');
 	}
 	if(this.enemyHP <= 0){
-		 this.song.pause();
+		 this.song.stop();
 		game.state.start('gmain');
 	}
 	if(this.input.right.isDown){
-		this.song.pause();
+		this.song.stop();
 		game.state.start('main');
 	}
 	if(this.pauseKey.isDown){
@@ -474,7 +494,7 @@ var mainG = {
 
     update: function() {
   		if(this.input.isDown){
-  			this.song.pause();
+  			this.song.stop();
   			game.state.start('mainJapan');
   		}
     },
@@ -519,15 +539,15 @@ var mainH = {
         }
       }
 	if(this.playerHP <= 0){
-		 this.song.pause();
-		game.state.start('bmain');
+		 this.song.stop();
+		game.state.start('gameover');
 	}
 	if(this.enemyHP <= 0){
-		 this.song.pause();
+		 this.song.stop();
 		game.state.start('imain');
 	}
 	if(this.input.right.isDown){
-		this.song.pause();
+		this.song.stop();
 		game.state.start('mainJapan');
 	}
 	if(this.pauseKey.isDown){
@@ -586,7 +606,7 @@ var mainI = {
 
     update: function() {
   		if(this.input.isDown){
-  			this.song.pause();
+  			this.song.stop();
   			game.state.start('mainCave');
   		}
     },
@@ -621,16 +641,16 @@ var mainJ = {
 
     update: function() {
 	if(this.playerHP <= 0){
-		 this.song.pause();
-		game.state.start('mainCave');
+		 this.song.stop();
+		game.state.start('gameover');
 	}
 	if(this.enemyHP <= 0){
-		 this.song.pause();
+		 this.song.stop();
 		game.state.start('kmain');
 	}
 	if(this.input.right.isDown){
-		this.song.pause();
-		game.state.start('main');
+		this.song.stop();
+		game.state.start('mainCave');
 	}
 	if(this.potKey.isDown){
     if (this.mutex == 1 && this.potCount >= 1) {
@@ -710,7 +730,7 @@ var mainK = {
 
     update: function() {
   		if(this.input.isDown){
-  			this.song.pause();
+  			this.song.stop();
   			game.state.start('mainGMU');
   		}
     },
@@ -739,16 +759,16 @@ var mainL = {
 
     update: function() {
 	if(this.playerHP <= 0){
-		 this.song.pause();
-		game.state.start('mainGMU');
+		 this.song.stop();
+		game.state.start('gameover');
 	}
 	if(this.enemyHP <= 0){
-		 this.song.pause();
+		 this.song.stop();
 		game.state.start('mmain');
 	}
 	if(this.input.right.isDown){
-		this.song.pause();
-		game.state.start('main');
+		this.song.stop();
+		game.state.start('mainGMU');
 	}
 	if(this.pauseKey.isDown){
 		if(this.bool2 == 1){
@@ -828,6 +848,27 @@ var mainM = {
     },
 };
 
+//game over state, press space to go to first level
+var gameover = {
+    preload: function() {
+	game.load.image('background' , 'assets/gameover.png');
+	game.load.audio('winmusic', 'assets/finalwin.mp3');
+    },
+
+    create: function() {
+		this.background = game.add.tileSprite(0,0,800,600,'background');
+		this.song = game.sound.play('winmusic');
+    this.input = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    },
+
+    update: function() {
+  		if(this.input.isDown){
+  			this.song.stop();
+  			game.state.start('bmain');
+  		}
+    },
+};
+
 
 var game = new Phaser.Game(800, 600);
 
@@ -847,4 +888,5 @@ game.state.add('kmain', mainK);
 game.state.add('mainGMU', mainGMU);
 game.state.add('lmain', mainL);
 game.state.add('mmain', mainM);
-game.state.start('jmain');
+game.state.add('gameover', gameover);
+game.state.start('bmain');

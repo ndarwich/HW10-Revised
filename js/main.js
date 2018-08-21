@@ -880,7 +880,7 @@ var mainM = {
 var gameover = {
     preload: function() {
 	game.load.image('background' , 'assets/game-over.png');
-	game.load.audio('winmusic', 'assets/finalwin.mp3');
+	game.load.audio('winmusic', 'assets/gameovermusic.mp3');
     },
 
     create: function() {

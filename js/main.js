@@ -579,17 +579,17 @@ var mainH = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(5,12,2); //enemy has 2 defense already
+		this.enemyHP = this.enemyHP - damage(5,14,2); //enemy has 2 defense already
 		this.labelScore.text = this.enemyHP;
 		this.playerHP = this.playerHP - damage(6,13,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(16,24,2);
+		this.enemyHP = this.enemyHP - damage(13,24,2);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - damage(14,22,this.defense);
+		this.playerHP = this.playerHP - damage(11,20,this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}

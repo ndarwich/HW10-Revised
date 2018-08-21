@@ -589,7 +589,7 @@ var mainH = {
 		this.enemyHP = this.enemyHP - damage(13,24,2);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - damage(11,20,this.defense);
+		this.playerHP = this.playerHP - damage(11,17,this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}

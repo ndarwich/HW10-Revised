@@ -169,7 +169,7 @@ var mainCave = {
 		game.load.image('background' , 'assets/cave.jpg');
 		game.load.image('player' , 'assets/player.png');
 		game.load.image('enemy' , 'assets/camelman.png');
-		game.load.audio('music', 'assets/asianmusic.mp3');
+		game.load.audio('music', 'assets/cavemusic.mp3');
     },
 
     create: function() {
@@ -336,7 +336,7 @@ var mainD = {
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(10, 14, 0);
+		this.enemyHP = this.enemyHP - damage(8, 15, 0);
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -344,7 +344,7 @@ var mainD = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - damage(14, 18, this.defense);
+		this.playerHP = this.playerHP - damage(6, 18, this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
@@ -451,7 +451,7 @@ var mainF = {
 
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(4, 8, 0);
+		this.enemyHP = this.enemyHP - damage(4, 9, 0);
 
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -459,12 +459,12 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - damage(6,10,this.defense);
+		this.playerHP = this.playerHP - damage(6,11,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(8, 12, 0);
+		this.enemyHP = this.enemyHP - damage(7, 13, 0);
 		var x1 = this.enemyHP;
 		if(this.enemyHP < 0){
 			this.labelScore.text = 0;
@@ -472,7 +472,7 @@ var mainF = {
 		else {
 			this.labelScore.text = this.enemyHP;
 		}
-		this.playerHP = this.playerHP - damage(11, 15, this.defense);
+		this.playerHP = this.playerHP - damage(7, 15, this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
@@ -579,17 +579,17 @@ var mainH = {
 	}
 	if(this.input.up.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(5,9,2); //enemy has 2 defense already
+		this.enemyHP = this.enemyHP - damage(5,14,2); //enemy has 2 defense already
 		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - damage(6,10,this.defense);
+		this.playerHP = this.playerHP - damage(6,13,this.defense);
 		this.labelScore1.text = this.playerHP;
 	}
 	if(this.input.down.isDown && this.keyPressed == 0){
 		this.keyPressed = 1;
-		this.enemyHP = this.enemyHP - damage(20,24,2);
+		this.enemyHP = this.enemyHP - damage(13,24,2);
 		var x1 = this.enemyHP;
 		this.labelScore.text = this.enemyHP;
-		this.playerHP = this.playerHP - damage(14,18,this.defense);
+		this.playerHP = this.playerHP - damage(11,17,this.defense);
 		var x2 = this.playerHP;
 		this.labelScore1.text = this.playerHP;
 	}
@@ -632,7 +632,7 @@ var mainI = {
 var mainJ = {
     preload: function() {
 	game.load.image('background' , 'assets/battle4.PNG');
-	game.load.audio('winmusic', 'assets/battlemusic.mp3');
+	game.load.audio('winmusic', 'assets/sandmusic.mp3');
     },
 
     create: function() {
@@ -880,7 +880,7 @@ var mainM = {
 var gameover = {
     preload: function() {
 	game.load.image('background' , 'assets/game-over.png');
-	game.load.audio('winmusic', 'assets/finalwin.mp3');
+	game.load.audio('winmusic', 'assets/gameovermusic.mp3');
     },
 
     create: function() {
